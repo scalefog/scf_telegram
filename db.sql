@@ -8,3 +8,7 @@ CREATE TABLE `telegrams` (
   `status` varchar(1) NOT NULL DEFAULT '0',
   `postoffice` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE characters
+  ADD  postbox VARCHAR(6);
