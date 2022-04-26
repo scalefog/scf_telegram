@@ -1,196 +1,266 @@
-body{
+body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top:10%;
+    margin-top: 10%;
     font-size: 18px;
 }
-ul{
+
+ul {
     list-style: none;
     padding: 0;
 }
 
-.inbox{
+.inbox {
     display: none;
-    color:#FFF;
-    margin:auto;
-    background-color:#000;
-    width: 650px;
-    height: 550px;
+    color: white;
+    margin: auto;
+    background-color: #000000f2;
+    width: 750px;
+    height: 650px;
     padding: 20px;
+    border-radius: 18px;
 }
-.header{
+
+.header {
     border-bottom: 1px solid #FFF;
     display: flex;
     flex-direction: row;
     padding-bottom: 15px;
 }
-.header h1{
+
+.header h1 {
     margin: 0;
     padding: 0;
     float: left;
-    font-size: 32px;
+    font-size: 25px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: normal;
 }
+
 .header div {
     width: 50%;
 }
-#postbox{
-    color:orange;
-    font-size: 32px;
+
+#postbox {
+    color: #ffc107a6;
+    font-size: 25px;
     float: right;
     font-family: Impact;
     font-weight: normal;
 }
+
 ::-webkit-scrollbar {
-    width: 0px;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+    width: 0px;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
 }
-.inboxContainer{
+
+.inboxContainer {
     height: 350px;
 }
-.inbox ul{
+
+.inbox ul {
     overflow-x: scroll;
-    height: 230px;
+    height: 360px;
 }
-.inbox_row{
+
+.inbox_row {
     display: flex;
     flex-direction: row;
     padding: 10px;
-    background: #222;
+    background: #22222242;
     margin-bottom: 10px;
 }
-.inbox_row:hover{
+
+.inbox_row:hover {
     cursor: pointer;
-    background: #333;
+    background: #000;
 }
-.inbox ul>div{
+
+.inbox ul>div {
     width: auto;
 }
-.inbox_subject{
+
+.inbox_subject {
     width: 60%;
 }
-.inbox_sender{
+
+.inbox_sender {
     padding-right: 20px;
 }
-.inbox_date{
+
+.inbox_date {
     width: 30%;
 }
-.view{
+
+.view {
     display: none;
     padding: 20px;
     position: relative;
-    margin:auto;
+    margin: auto;
+    width: 800px;
+    height: 400px;
+    background: url("bg.png") no-repeat;
+
+}
+
+.compose {
+    display: none;
+    padding: 20px;
+    position: relative;
+    margin: auto;
     width: 800px;
     height: 400px;
     background: url("bg.png") no-repeat;
 }
-.compose{
-    display: none;
-    padding: 20px;
-    position: relative;
-    margin:auto;
-    width: 800px;
-    height: 400px;
-    background: url("bg.png") no-repeat;
+
+.inbox i {
+    color: #eae4e4;
+
 }
-.inbox i{
-    color:#FFF;
-}
+
 .inbox_subject i {
     padding-right: 5px;
+
 }
-.btn{
+
+.btn {
     font-size: 17px;
-    background: rgb(87, 49, 49);
+    background: rgb(255 255 255);
     border: 1px solid transparent;
-    color:#FFF;
+    border-radius: 08px;
+    color: #000;
     text-transform: uppercase;
-    width: 100%;
-    display: block;
-    margin-bottom: 15px;
-    padding: 10px;
+    width: 40%;
+    display: blockk;
+    margin-left: 55px;
+    margin-top: 150px;
+    padding: 9px;
     font-family: Impact;
     font-weight: normal;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
+
 }
-.telegram_header{
+
+.telegram_header {
     position: relative;
     margin-top: 52px;
     margin-bottom: 15px;
+
 }
-.telegram_header h1{
+
+.telegram_header h1 {
     text-align: center;
     text-transform: uppercase;
+
 }
-.telegram_info{
+
+.telegram_info {
     display: flex;
     flex-direction: row;
+
 }
-.telegram_info div{
+
+.telegram_info div {
     width: 33%;
+
 }
-.btn:hover{
+
+.btn:hover {
     cursor: pointer;
 }
-a{
+
+a {
     text-decoration: none;
+
 }
-.close_view{
+
+.close_view {
     position: absolute;
     top: 10px;
     right: 50px;
-    color:#000;
+    color: black;
+
+
 }
-#view_subject{
+
+#view_subject {
     padding-top: 5px;
     padding-bottom: 5px;
+    font-weight: bolder;
+    font-size: 20px;
+
 }
-.telegram_footer{
+
+.telegram_footer {
     text-align: center;
+
 }
-.telegram_footer button{
-    background-color: #998875;
+
+.telegram_footer button {
+    background-color: #ecd6a1eb;
     border: 0;
-    color:#FFF;
-    padding: 20px;
+    color: #000;
+    padding: 10px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: bolder;
+    border-radius: 08px;
+
 }
-.compose #subject{
+
+.compose #subject {
     font-size: 18px;
+
 }
-input[type="submit"]:hover{
-  cursor: pointer!important;
+
+input[type="submit"]:hover {
+    cursor: pointer !important;
 }
-input[type="text"]{
+
+input[type="text"] {
     background: transparent;
-    color:#000;
-    border:0;
+    color: #f11b1b;
+    border: 0;
+
 }
-textarea{
+
+textarea {
     width: 100%;
     background: transparent;
-    color:#000;
-    border:0;
+    color: #000;
+    font-weight: bold;
+    border: 0;
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 17px;
+    font-family: cursive;
+
 }
-#recipient{
-    text-transform: uppercase;
+
+#recipient {
+    text-transform: uppercasecase;
+
 }
+
 input::-webkit-input-placeholder {
-    color:#444;
-  }
-  textarea::-webkit-input-placeholder {
-    color:#444;
+    color: #f11b1b;
+}
+
+textarea::-webkit-input-placeholder {
+    color: #444343;
     text-transform: normal;
-  }
-  form{
-      padding: 0;
-      margin: 0;
-  }
-  textarea:focus, input:focus{
+
+}
+
+form {
+    padding: 0;
+    margin: 0;
+
+}
+
+textarea:focus,
+input:focus {
     outline: none;
+
 }
