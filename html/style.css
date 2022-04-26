@@ -103,7 +103,7 @@ ul{
 }
 .btn{
     font-size: 17px;
-    background: #222;
+    background: rgb(87, 49, 49);
     border: 1px solid transparent;
     color:#FFF;
     text-transform: uppercase;

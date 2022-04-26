@@ -90,7 +90,7 @@ $(document).ready(function(){
        $(".view").fadeIn().show();
     });
 });
-document.onkeyup = function (data) {
+document.keyup = function (data) {
     if (data.which == 27) {
         $.post('http://scf_telegram/NUIFocusOff', JSON.stringify({}));
     }
