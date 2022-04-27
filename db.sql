@@ -13,9 +13,9 @@ CREATE TABLE `telegrams` (
 ALTER TABLE characters
   ADD  postbox VARCHAR(6);
   
-  ALTER TABLE `telegrams`
+ALTER TABLE `telegrams`
   ADD PRIMARY KEY (`id`);
-  
-  ALTER TABLE `telegrams`
+
+ALTER TABLE `telegrams`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
