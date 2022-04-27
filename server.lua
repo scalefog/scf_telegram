@@ -102,3 +102,14 @@ AddEventHandler("scf_telegram:getTelegram", function(tid)
         end
     end)
 end)
+
+RegisterServerEvent("scf_telegramr:deleteTelegram")
+AddEventHandler("scf_telegram:deleteTelegram", function(tid)
+	local _source = source
+    exports.ghmattimysql:execute("DELETE FROM telegrams WHERE id = @id", { ["@id"] = tid })
+		if count > 0 then 
+			TriggerEvent("scf_telegram:check_inbox")
+		else
+            TriggerClientEvent("vorp:TipRight", _source, "We are unable to delete your Telegram right now. Please try again later.", 3000)
+		end
+end)
