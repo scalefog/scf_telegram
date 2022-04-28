@@ -42,9 +42,7 @@ function getOrGenerate(charid, cb)
         end
     end)
 end
-exports.ghmattimysql:execute("SELECT postbox FROM characters WHERE postbox = @pox",{["@pox"] = data.recipient}, function(result)
 
-end)
 RegisterServerEvent("scf_telegram:check_inbox")
 AddEventHandler("scf_telegram:check_inbox", function()
     local _source = source
