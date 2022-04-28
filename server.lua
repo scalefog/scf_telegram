@@ -72,15 +72,24 @@ AddEventHandler("scf_telegram:SendTelegram", function(data)
     if currentMoney >= removeMoney then
         getOrGenerate(Character.charIdentifier, function(postbox)
             local sentDate = os.date("%x")
-            local Parameters = { ['recipient'] = data.recipient, ['sender'] = postbox, ['subject'] = data.subject, ['sentTime'] = sentDate, ['message'] = data.message, ['postoffice'] = data.postoffice }
-            exports.ghmattimysql:execute("INSERT INTO telegrams ( `recipient`,`sender`,`subject`,`sentTime`,`message`,`postoffice`) VALUES ( @recipient,@sender, @subject,@sentTime,@message,@postoffice )", Parameters)
+            exports.ghmattimysql:execute("SELECT postbox FROM characters WHERE postbox = @pox",{["@pox"] = data.recipient}, function(result)
+                if result[1] ~= nil then
+                    if data.recipient == nil or data.recipient == '' and data.subject == nil or data.subject == '' then
+                        TriggerClientEvent("vorp:TipRight", _source, "You need to add a PO Box and the Subject of your message", 3000) 
+                    else
+                        local Parameters = { ['recipient'] = data.recipient, ['sender'] = postbox, ['subject'] = data.subject, ['sentTime'] = sentDate, ['message'] = data.message, ['postoffice'] = data.postoffice }
+                        exports.ghmattimysql:execute("INSERT INTO telegrams ( `recipient`,`sender`,`subject`,`sentTime`,`message`,`postoffice`) VALUES ( @recipient,@sender, @subject,@sentTime,@message,@postoffice )", Parameters)
+                        TriggerEvent("vorp:removeMoney", _source, 0, removeMoney)
+                        TriggerClientEvent("vorp:TipRight", _source, "Telegram have been sent for an ammount of" .. removeMoney .. "cents", 3000)
+                    end
+                else
+                    TriggerClientEvent("vorp:TipRight", _source, "The POBox you are trying to send the Telegram to, does not exist", 3000) 
+                end
+            end)
         end)
-        TriggerEvent("vorp:removeMoney", _source, 0, removeMoney)
-        TriggerClientEvent("vorp:TipRight", _source, "Telegram have been sent for an ammount of" .. removeMoney .. "cents", 3000)
     else
         TriggerClientEvent("vorp:TipRight", _source, "you do not have enough money", 3000)
     end
-
 end)
 
 RegisterServerEvent("scf_telegram:getTelegram")
@@ -101,4 +110,21 @@ AddEventHandler("scf_telegram:getTelegram", function(tid)
             TriggerClientEvent("messageData", _source, telegram)
         end
     end)
+end)
+
+RegisterServerEvent("scf_telegram:DeleteTelegram")
+AddEventHandler("scf_telegram:DeleteTelegram", function(tid)
+	local _source = source
+
+    Citizen.Wait(0)
+   
+    exports.ghmattimysql:execute("SELECT * FROM telegrams WHERE id = @id", { ['@id'] = tid }, function(result)
+        if result[1] ~= nil then
+            exports.ghmattimysql:execute("DELETE FROM telegrams WHERE id = @id", { ["@id"] = tid })
+            TriggerClientEvent("vorp:TipRight", _source, "Telegram deleted.", 3000)
+        else
+            TriggerClientEvent("vorp:TipRight", _source, "Failed to delete your message.", 3000)
+        end
+    end)
+    
 end)
