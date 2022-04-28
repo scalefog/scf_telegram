@@ -1,10 +1,11 @@
+
 local prompts = GetRandomIntInRange(0, 0xffffff)
 
 function TogglePost(name)
     InMenu = true
     SetNuiFocus(true, true)
     SendNUIMessage({ type = 'openGeneral', postname = name })
-    TriggerServerEvent('scf_telegram:check_inbox')
+    TriggerServerEvent('scf_telegram:check_inbox', GetPlayers())
 end
 
 Citizen.CreateThread(function()
@@ -29,7 +30,7 @@ Citizen.CreateThread(function()
         for k, v in pairs(Config.postoffice) do
             local blip = Citizen.InvokeNative(0x554d9d53f696d002, 1664425300, v.coords)
             SetBlipSprite(blip, v.blip, 1)
-            Citizen.InvokeNative(0x9CB1A1623062F402, blip, "post office" )
+            Citizen.InvokeNative(0x9CB1A1623062F402, blip, "Post Office")
         end
     end
 end)
@@ -55,6 +56,18 @@ Citizen.CreateThread(function()
     end
 end)
 
+function GetPlayers()
+	local players = {}
+
+	for _, player in ipairs(GetActivePlayers()) do
+		if NetworkIsPlayerActive(player) then
+			table.insert(players, player)
+		end
+	end
+
+	return players
+end
+
 
 RegisterNUICallback('getview', function(data)
     TriggerServerEvent('scf_telegram:getTelegram', tonumber(data.id))
@@ -62,6 +75,10 @@ end)
 
 RegisterNUICallback('sendTelegram', function(data)
     TriggerServerEvent('scf_telegram:SendTelegram', data)
+end)
+
+RegisterNUICallback('delete', function(data)
+    TriggerServerEvent("scf_telegram:DeleteTelegram", tonumber(data.id))
 end)
 
 RegisterNetEvent('messageData')
