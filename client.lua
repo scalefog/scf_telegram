@@ -4,7 +4,7 @@ function TogglePost(name)
     InMenu = true
     SetNuiFocus(true, true)
     SendNUIMessage({ type = 'openGeneral', postname = name })
-    TriggerServerEvent('scf_telegram:check_inbox')
+    TriggerServerEvent('scf_telegram:check_inbox', GetPlayers())
 end
 
 Citizen.CreateThread(function()
@@ -55,6 +55,18 @@ Citizen.CreateThread(function()
     end
 end)
 
+function GetPlayers()
+	local players = {}
+
+	for _, player in ipairs(GetActivePlayers()) do
+		if NetworkIsPlayerActive(player) then
+			table.insert(players, player)
+		end
+	end
+
+	return players
+end
+
 
 RegisterNUICallback('getview', function(data)
     TriggerServerEvent('scf_telegram:getTelegram', tonumber(data.id))
@@ -64,8 +76,8 @@ RegisterNUICallback('sendTelegram', function(data)
     TriggerServerEvent('scf_telegram:SendTelegram', data)
 end)
 
-RegisterNUICallback('delete', function()
-    TriggerServerEvent("scf_telegram:deleteTelegram", tonumber(data.id))
+RegisterNUICallback('delete', function(data)
+    TriggerServerEvent("scf_telegram:DeleteTelegram", tonumber(data.id))
 end)
 
 RegisterNetEvent('messageData')

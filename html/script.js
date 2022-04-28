@@ -6,9 +6,9 @@ function loadInbox(list){
     if(list.length > 0) {
         list.forEach(function(letter){
             if(letter.status == 1){
-                $("#inboxList").append(`<li class="inbox_row" data-id="`+letter.id+`"><div class="inbox_subject"><i class="fa fa-envelope-open"></i> `+letter.subject+`</div><div class="inbox_sender">`+letter.sender+`</div><div class="inbox_date">`+letter.sentTime+`</div><a class="telegram_delete_button" href="#"><i class="fa fa-trash-alt"></i></a></li>`);
+                $("#inboxList").append(`<li class="inbox_row" data-id="`+letter.id+`"><div class="inbox_subject"><i class="fa fa-envelope-open"></i> `+letter.subject+`</div><div class="inbox_sender">`+letter.sender+`</div><div class="inbox_date">`+letter.sentTime+`</div><a href="#"><i class="fa fa-trash-alt"></i></a></li>`);
             }else{
-                $("#inboxList").append(`<li class="inbox_row" data-id="`+letter.id+`"><div class="inbox_subject"><i class="fa fa-envelope"></i> <b>`+letter.subject+`</b></div><div class="inbox_sender">`+letter.sender+`</div><div class="inbox_date">`+letter.sentTime+`</div><a class="telegram_delete_button" href="#"><i class="fa fa-trash-alt"></i></a></li>`);
+                $("#inboxList").append(`<li class="inbox_row" data-id="`+letter.id+`"><div class="inbox_subject"><i class="fa fa-envelope"></i> <b>`+letter.subject+`</b></div><div class="inbox_sender">`+letter.sender+`</div><div class="inbox_date">`+letter.sentTime+`</div><a href="#"><i class="fa fa-trash-alt"></i></a></li>`);
             }
         });
     }else{
@@ -84,16 +84,17 @@ $(function () {
 
 $(document).ready(function(){
     $("#inboxList").on("click",'li',function(event){
-
+        itemToDel = $(this).data('id');
         $.post('http://scf_telegram/getview', JSON.stringify({id: $(this).data('id')}));
        $(".inbox").fadeOut().hide();
        $(".view").fadeIn().show();
     });
 });
 
-$(".telegram_delete_button").unbind().click(function(){
-    $.post('http://scf_telegram/delete', JSON.stringify({})
-  );
+$(".telegram_delete_button").click(function(event){
+    $.post('http://scf_telegram/delete', JSON.stringify({id: itemToDel}));
+    $(".inbox").fadeIn().show();
+    $(".view").fadeOut().hide();
 });
 
 document.keyup = function (data) {
