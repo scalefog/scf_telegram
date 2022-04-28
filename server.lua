@@ -128,4 +128,3 @@ AddEventHandler("scf_telegram:DeleteTelegram", function(tid)
     end)
     
 end)
-

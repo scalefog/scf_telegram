@@ -1,3 +1,4 @@
+
 local prompts = GetRandomIntInRange(0, 0xffffff)
 
 function TogglePost(name)
