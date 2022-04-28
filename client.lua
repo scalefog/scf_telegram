@@ -29,7 +29,7 @@ Citizen.CreateThread(function()
         for k, v in pairs(Config.postoffice) do
             local blip = Citizen.InvokeNative(0x554d9d53f696d002, 1664425300, v.coords)
             SetBlipSprite(blip, v.blip, 1)
-            Citizen.InvokeNative(0x9CB1A1623062F402, blip, "Post Office")
+            Citizen.InvokeNative(0x9CB1A1623062F402, blip, Config.blipName)
         end
     end
 end)
