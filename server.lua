@@ -102,3 +102,4 @@ AddEventHandler("scf_telegram:getTelegram", function(tid)
         end
     end)
 end)
+
