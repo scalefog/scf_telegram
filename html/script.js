@@ -84,12 +84,19 @@ $(function () {
 
 $(document).ready(function(){
     $("#inboxList").on("click",'li',function(event){
-
+        itemToDel = $(this).data('id');
         $.post('http://scf_telegram/getview', JSON.stringify({id: $(this).data('id')}));
        $(".inbox").fadeOut().hide();
        $(".view").fadeIn().show();
     });
 });
+
+$(".telegram_delete_button").click(function(event){
+    $.post('http://scf_telegram/delete', JSON.stringify({id: itemToDel}));
+    $(".inbox").fadeIn().show();
+    $(".view").fadeOut().hide();
+});
+
 document.keyup = function (data) {
     if (data.which == 27) {
         $.post('http://scf_telegram/NUIFocusOff', JSON.stringify({}));
